@@ -3,7 +3,8 @@ Project Charter:
 
 Analysis: Build a correlation of impact by sector on stock price vs increasing corona virus cases.
 
-Hypothesis: number of corona virus cases by industry are going to be most heavily impacted in non-enterprise service industries: Tech - no impact, Health Care - no impact, Airline - impacted, Retail - impacted, Finance - not impacted.
+Hypothesis: number of corona virus cases by industry are going to be most heavily impacted in non-enterprise service industries: Tech - no impact, Health Care Insureance - no impact, Airline - impacted, Retail - impacted, Finance - not impacted.
+
 Charts
 
 Bar/Line: Time (weeks) vs average weekly stock price by sector
