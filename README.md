@@ -47,6 +47,5 @@ Bar/Line: Time (weeks) vs average weekly stock price by sector
 Bar/Line: number of new cases vs average weekly stock price by sector
 Bar/Line: number of incremental deaths vs average weekly stock price by sector  
 
-Quartile:
+Scatter/Quartile: Industry vs Daily Avg closing proce for each stock 
 
-Scatter:
