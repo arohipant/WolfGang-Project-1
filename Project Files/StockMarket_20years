@@ -1,0 +1,72 @@
+# Dependencies and Setup
+import os
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import requests
+import time
+import scipy.stats as st
+from scipy.stats import linregress
+from pprint import pprint
+
+
+# Import API key
+from api_keys import weather_api_key
+
+# Incorporated citipy to determine city based on latitude and longitude
+from citipy import citipy
+
+dirName='output_data'
+
+try:
+    # Create target Directory
+    os.mkdir(dirName)
+    print("Directory " , dirName ,  " Created ") 
+except FileExistsError:
+    print("Directory " , dirName ,  " already exists")
+    
+dirName='Images'
+
+try:
+    # Create target Directory
+    os.mkdir(dirName)
+    print("Directory " , dirName ,  " Created ") 
+except FileExistsError:
+    print("Directory " , dirName ,  " already exists")
+
+
+
+#query_url = f"{url}appid={api_key}&units={units}&q="
+#units=metric
+#query_url="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&outputsize=full&apikey=BVMP1QBTTMD02IYI"
+
+url="https://www.alphavantage.co/query?"
+function="function=TIME_SERIES_DAILY"
+apikey="&apikey=BVMP1QBTTMD02IYI"
+output="&outputsize=full"
+
+final_df=pd.DataFrame()
+
+companies={'FB','GOOGL','AAPL','MSFT','TWTR','UNH','HUM','PFE','JNJ','HCA','DAL','BA','CCL','UAL','STWD'
+         ,'AMZN','WMT','JCP','TGT','M','JPM','C','BRKB','WFC','BAC'}
+for company in companies:
+    print(company)
+    Company=company
+    print(Company)
+    symbol="&symbol="+Company
+    query_url=url+function+symbol+output+apikey
+    print(query_url)
+    response = requests.get(query_url)
+    time.sleep(13)
+    #pprint(response.json())
+    ibm=response.json()
+    ibm_dict=ibm["Time Series (Daily)"]
+    ibm_df=pd.DataFrame(ibm_dict)
+    ibm_df_tram=ibm_df.transpose()
+    ibm_df_tram["Company"]=Company
+    ibm_df_tram
+    final_df
+    frames = [final_df, ibm_df_tram]
+    final_df = pd.concat(frames)
+    #final_df = pd.concat([final_df,ibm_df_tram], axis=1)
+final_df

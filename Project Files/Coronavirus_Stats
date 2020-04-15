@@ -1,0 +1,50 @@
+# Dependencies and Setup
+import os
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import requests
+import time
+import scipy.stats as st
+from scipy.stats import linregress
+from pprint import pprint
+
+
+# Import API key
+from api_keys import weather_api_key
+
+# Incorporated citipy to determine city based on latitude and longitude
+from citipy import citipy
+
+dirName='output_data'
+
+try:
+    # Create target Directory
+    os.mkdir(dirName)
+    print("Directory " , dirName ,  " Created ") 
+except FileExistsError:
+    print("Directory " , dirName ,  " already exists")
+    
+dirName='Images'
+
+try:
+    # Create target Directory
+    os.mkdir(dirName)
+    print("Directory " , dirName ,  " Created ") 
+except FileExistsError:
+    print("Directory " , dirName ,  " already exists")
+
+from datetime import date
+import datetime
+url="https://covidtracking.com/api/v1/states/daily.json"
+response=requests.request("GET",url)
+corona_df=pd.DataFrame(response.json())
+corona_df
+corona_df["date"]=corona_df["date"].astype(str)
+#today=datetime.date(.strftime("%Y%m%d")
+today=date.today().strftime("%Y%m%d")
+#today=int(float('today'))
+#today
+#print(f"{today}")
+curr_corona_df=corona_df.loc[corona_df["date"] == today]
+curr_corona_df
